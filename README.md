@@ -133,6 +133,9 @@ This repo includes:
 - `.github/workflows/deploy-pages.yml`
 
 It runs on a daily schedule and manual trigger, generates `reports/latest.html`, then deploys it to GitHub Pages as `index.html`.
+It now deploys:
+- `index.html`: a static dashboard shell page
+- `latest.html`: latest generated report (embedded in `index.html`)
 
 Enable in GitHub:
 
@@ -142,3 +145,7 @@ Enable in GitHub:
 3. Open `Actions` tab and run `Deploy Paper Report to GitHub Pages` once.
 4. Your report page will be available at:
    - `https://<your-username>.github.io/<repo-name>/`
+
+Note:
+- GitHub Pages is static hosting. The interactive local APIs (`/config`, `/run`) are not available on Pages.
+- Use local dashboard (`http://127.0.0.1:8765/`) for interactive runs; Pages is for public viewing.
