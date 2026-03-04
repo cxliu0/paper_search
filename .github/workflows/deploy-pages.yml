@@ -35,7 +35,53 @@ jobs:
       - name: Prepare Pages artifact
         run: |
           mkdir -p _site
-          cp reports/latest.html _site/index.html
+          cp reports/latest.html _site/latest.html
+          cat > _site/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>Paper Agent Dashboard (Pages)</title>
+            <style>
+              body {
+                margin: 0;
+                font-family: "Avenir Next", "Segoe UI", sans-serif;
+                background: #f6f8fb;
+                color: #0f172a;
+              }
+              .wrap {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 16px;
+              }
+              .note {
+                font-size: 13px;
+                color: #475569;
+                margin-bottom: 10px;
+              }
+              iframe {
+                width: 100%;
+                min-height: 88vh;
+                border: 1px solid #d1d5db;
+                border-radius: 10px;
+                background: white;
+              }
+              a { color: #0f766e; }
+            </style>
+          </head>
+          <body>
+            <div class="wrap">
+              <h1>Paper Agent Dashboard (GitHub Pages)</h1>
+              <div class="note">
+                This Pages site is static. Interactive run/config APIs are available in your local dashboard only.
+                Open latest report directly: <a href="./latest.html">latest.html</a>
+              </div>
+              <iframe src="./latest.html" title="Latest arXiv report"></iframe>
+            </div>
+          </body>
+          </html>
+          EOF
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -52,4 +98,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
